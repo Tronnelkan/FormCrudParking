@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace BusManagementApp
         private Button addButton;
         private Button editButton;
         private Button deleteButton;
-        private string connectionString = "Host=localhost;Port=5433;Username=postgres;Password=tatarinn;Database=parking_db_2";
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         public BusForm()
         {
@@ -94,15 +95,15 @@ namespace BusManagementApp
                 using (IDbConnection db = new NpgsqlConnection(connectionString))
                 {
                     string query = @"
-                        SELECT 
-                            b.id_bus AS IdBus,
-                            b.bus_mark AS BusMark,
-                            b.number_sign AS NumberSign,
-                            d.firstname || ' ' || d.lastname AS DriverName,
-                            b.number_of_seats AS NumberOfSeats
-                        FROM buses b
-                        INNER JOIN drivers d ON b.the_driver = d.id_driver
-                        ORDER BY b.id_bus";
+                SELECT 
+                    b.id_bus AS IdBus,
+                    b.bus_mark AS BusMark,
+                    b.number_sign AS NumberSign,
+                    d.firstname || ' ' || d.lastname AS DriverName,
+                    b.number_of_seats AS NumberOfSeats
+                FROM buses b
+                INNER JOIN drivers d ON b.the_driver = d.id_driver
+                ORDER BY b.id_bus";
 
                     var buses = await db.QueryAsync<Bus>(query);
                     busesGridView.DataSource = buses.ToList();
@@ -113,6 +114,7 @@ namespace BusManagementApp
                 MessageBox.Show($"Error loading buses: {ex.Message}");
             }
         }
+
 
         private void AddButton_Click(object sender, EventArgs e)
         {

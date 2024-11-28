@@ -1,4 +1,4 @@
-п»ї// Program.cs
+// Program.cs
 
 using System;
 using System.Windows.Forms;
@@ -10,8 +10,8 @@ namespace BusManagementApp
         [STAThread]
         static void Main()
         {
-            // Р—Р°РїСѓСЃРє Flyway РјС–РіСЂР°С†С–Р№ (РѕРїС†С–РѕРЅР°Р»СЊРЅРѕ)
-            // РњРѕР¶РЅР° РґРѕРґР°С‚Рё РєРѕРґ РґР»СЏ Р·Р°РїСѓСЃРєСѓ Flyway Р°Р±Рѕ РІРёРєРѕРЅР°С‚Рё РјС–РіСЂР°С†С–С— РѕРєСЂРµРјРѕ.
+            // Запуск Flyway міграцій (опціонально)
+            // Можна додати код для запуску Flyway або виконати міграції окремо.
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
